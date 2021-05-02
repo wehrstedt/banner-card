@@ -20,6 +20,8 @@ resources:
     type: module
 ```
 
+<a href="https://www.buymeacoffee.com/nervetattoo"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=nervetattoo&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff"></a>
+
 ## Available configuration options:
 
 | Key                  | Type                 | Description                                                                                                                                                                                                 | Example                                                                                                                                          |
@@ -47,24 +49,24 @@ Previously headings only allowed strings and icons were a hack using unicode emo
 **From 0.10.0** you can however render icons from the mdi/hass icon sets:
 
 ```yaml
-- type: custom:banner-card
-  heading:
-    - mdi:shower
-    - Bathroom
+type: custom:banner-card
+heading:
+  - mdi:shower
+  - Bathroom
 ```
 
 Using the alternate YAML form for arrays might be more/less readable depending on your preference:
 
 ```yaml
-- type: custom:banner-card
-  heading: [mdi:shower, Bathroom]
+type: custom:banner-card
+heading: [mdi:shower, Bathroom]
 ```
 
 You can combine as many texts and icons as you like this way.
 
 ```yaml
-- type: custom:banner-card
-  heading: [mdi:shower, Bathroom, mdi:paper-roll]
+type: custom:banner-card
+heading: [mdi:shower, Bathroom, mdi:paper-roll]
 ```
 
 ### heading_entity
