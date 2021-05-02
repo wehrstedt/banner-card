@@ -281,19 +281,19 @@ class BannerCard extends LitElement {
             // Allow overriding rendering + action if custom is set to true
             // disabled for me because i dont use it but want to override the onclick without
             // custom rendering...
-            if (false && config.action) {
-              return this.renderCustom({
-                ...options,
-                action: () => {
-                  const { service, ...serviceData } = config.action;
-                  const [domain, action] = service.split(".");
-                  this._hass.callService(domain, action, {
-                    entity_id: config.entity,
-                    ...serviceData,
-                  });
-                },
-              });
-            }
+            // if (config.action) {
+            //   return this.renderCustom({
+            //     ...options,
+            //     action: () => {
+            //       const { service, ...serviceData } = config.action;
+            //       const [domain, action] = service.split(".");
+            //       this._hass.callService(domain, action, {
+            //         entity_id: config.entity,
+            //         ...serviceData,
+            //       });
+            //     },
+            //   });
+            // }
 
             // If an attribute is requested we assume not to render
             // any domain specifics
