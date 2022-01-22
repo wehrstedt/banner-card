@@ -80,9 +80,11 @@ class BannerCard extends LitElement {
         "var(--bc-heading-color-light)",
         "var(--bc-heading-color-dark)"
       );
-    
+
     this.headerNotActiveColor = this.color;
-    this.headerActiveColor = `var(--paper-item-icon-active-color, ${this.color.match(/(var\(.+\))|(.+)/)[1]})`;
+    this.headerActiveColor = `var(--paper-item-icon-active-color, ${
+      this.color.match(/(var\(.+\))|(.+)/)[1]
+    })`;
 
     const rowSizeType = typeof config.row_size;
     if (rowSizeType !== "undefined") {
@@ -109,7 +111,7 @@ class BannerCard extends LitElement {
     if (this.config.heading_entity) {
       if (typeof this.config.heading_entity === "string") {
         this.heading_entity = this.parseEntity({
-          entity: this.config.heading_entity
+          entity: this.config.heading_entity,
         });
       } else {
         this.heading_entity = this.parseEntity(this.config.heading_entity);
@@ -211,11 +213,9 @@ class BannerCard extends LitElement {
             ...serviceData,
           });
         } else {
-          this._hass.callService(
-            this.heading_entity.domain,
-            "toggle",
-            { entity_id: this.heading_entity.entity }
-          );
+          this._hass.callService(this.heading_entity.domain, "toggle", {
+            entity_id: this.heading_entity.entity,
+          });
         }
       }
     };
@@ -470,18 +470,18 @@ class BannerCard extends LitElement {
             icon="hass:arrow-up"
             role="button"
             @click=${this._service("cover", "open_cover", entity)}
-          ></ha-icon-button>
+          ><ha-icon icon="hass:arrow-up"></ha-icon-button>
           <ha-icon-button
             icon="hass:stop"
             role="button"
             @click=${this._service("cover", "stop_cover", entity)}
-          ></ha-icon-button>
+          ><ha-icon icon="hass:arrow-stop"></ha-icon-button>
           <ha-icon-button
             ?disabled=${isclosed}
             icon="hass:arrow-down"
             role="button"
             @click=${this._service("cover", "close_cover", entity)}
-          ></ha-icon-button>
+          ><ha-icon icon="hass:arrow-down"></ha-icon-button>
         </span>
       </div>
     `;
