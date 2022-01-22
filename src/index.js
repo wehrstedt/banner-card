@@ -475,7 +475,7 @@ class BannerCard extends LitElement {
             icon="hass:stop"
             role="button"
             @click=${this._service("cover", "stop_cover", entity)}
-          ><ha-icon icon="hass:arrow-stop"></ha-icon-button>
+          ><ha-icon icon="hass:stop"></ha-icon-button>
           <ha-icon-button
             ?disabled=${isclosed}
             icon="hass:arrow-down"

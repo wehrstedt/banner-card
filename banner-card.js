@@ -1210,7 +1210,7 @@
   }
   !(function (t) {
     console.info("%cbanner-card: " + t, "font-weight: bold");
-  })("0.13.1");
+  })("0.13.2");
   const nt = /^(mdi|hass):/;
   function rt(t) {
     return "string" == typeof t && t.match(nt);
@@ -1608,7 +1608,7 @@
             icon="hass:stop"
             role="button"
             @click=${this._service("cover", "stop_cover", n)}
-          ><ha-icon icon="hass:arrow-stop"></ha-icon-button>
+          ><ha-icon icon="hass:stop"></ha-icon-button>
           <ha-icon-button
             ?disabled=${r}
             icon="hass:arrow-down"
