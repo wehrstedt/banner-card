@@ -1210,7 +1210,7 @@
   }
   !(function (t) {
     console.info("%cbanner-card: " + t, "font-weight: bold");
-  })("0.13.2");
+  })("0.13.3");
   const nt = /^(mdi|hass):/;
   function rt(t) {
     return "string" == typeof t && t.match(nt);
@@ -1580,12 +1580,12 @@
       <div class="entity-state" style="${this.grid(e)}">
         ${ot(i, t)}
         <span class="entity-value">
-          <mwc-switch
-            style="--mdc-theme-secondary: ${o};"
+          <ha-switch
+            /*style="--mdc-theme-secondary: ${o};"*/
             ?checked=${"on" === s}
             @click=${this._service(n, "toggle", r)}
           >
-          </mwc-switch>
+          </ha-switch>
         </span>
       </div>
     `
