@@ -469,13 +469,13 @@
         (this.__pendingValue = g);
     }
   }
-  class $ extends x {
+  class k extends x {
     constructor(t, e, i) {
       super(t, e, i),
         (this.single = 2 === i.length && "" === i[0] && "" === i[1]);
     }
     _createPart() {
-      return new k(this);
+      return new E(this);
     }
     _getValue() {
       return this.single ? this.parts[0].value : super._getValue();
@@ -485,13 +485,13 @@
         ((this.dirty = !1), (this.element[this.name] = this._getValue()));
     }
   }
-  class k extends C {}
-  let E = !1;
+  class E extends C {}
+  let $ = !1;
   (() => {
     try {
       const t = {
         get capture() {
-          return (E = !0), !1;
+          return ($ = !0), !1;
         },
       };
       window.addEventListener("test", t, t),
@@ -549,7 +549,7 @@
   }
   const T = (t) =>
     t &&
-    (E ? { capture: t.capture, passive: t.passive, once: t.once } : t.capture);
+    ($ ? { capture: t.capture, passive: t.passive, once: t.once } : t.capture);
   /**
    * @license
    * Copyright (c) 2017 The Polymer Project Authors. All rights reserved.
@@ -609,7 +609,7 @@
     handleAttributeExpressions(t, e, i, s) {
       const n = e[0];
       if ("." === n) {
-        return new $(t, e.slice(1), i).parts;
+        return new k(t, e.slice(1), i).parts;
       }
       if ("@" === n) return [new A(t, e.slice(1), s.eventContext)];
       if ("?" === n) return [new N(t, e.slice(1), i)];
@@ -1210,15 +1210,15 @@
   }
   !(function (t) {
     console.info("%cbanner-card: " + t, "font-weight: bold");
-  })("0.13.3");
+  })("0.13.4");
   const nt = /^(mdi|hass):/;
   function rt(t) {
     return "string" == typeof t && t.match(nt);
   }
   function ot(t, e = null) {
     return e
-      ? j` <a class="entity-name" @click=${e}>${t}</a> `
-      : j` <span class="entity-name">${t}</span> `;
+      ? j`<a class="entity-name" @click="${e}">${t}</a>`
+      : j`<span class="entity-name">${t}</span>`;
   }
   class at extends X {
     static get properties() {
@@ -1351,18 +1351,15 @@
       return () => this._hass.callService(t, e, { entity_id: i });
     }
     render() {
-      return j`
-      <ha-card style="background: ${this.config.background};">
-        ${this.renderHeading()} ${this.renderEntities()}
-      </ha-card>
-    `;
+      return j`<ha-card style="background:${
+        this.config.background
+      }">${this.renderHeading()} ${this.renderEntities()}</ha-card>`;
     }
     renderHeading() {
       let t = this.config.heading;
       if (!1 === t) return null;
       Array.isArray(t) || (t = [t]);
-      return j`
-      <h2 class="heading" @click=${() => {
+      return j`<h2 class="heading" @click="${() => {
         if (this.config.link) this.navigate(this.config.link);
         else if (this.heading_entity.entity)
           if (this.heading_entity.action) {
@@ -1376,34 +1373,20 @@
             this._hass.callService(this.heading_entity.domain, "toggle", {
               entity_id: this.heading_entity.entity,
             });
-      }} style="color: ${this.color};">
-        ${t.map((t) =>
-          rt(t)
-            ? j`
-              <ha-icon class="heading-icon" .icon="${t}"></ha-icon>
-            `
-            : j` <span>${t}</span> `
-        )}
-      </h2>
-    `;
+      }}" style="color:${this.color}">${t.map((t) => (rt(t) ? j`<ha-icon class="heading-icon" .icon="${t}"></ha-icon>` : j`<span>${t}</span>`))}</h2>`;
     }
     renderEntities() {
       return 0 === this.entityValues.length
         ? null
-        : j`
-      <div class="overlay-strip">
-        <div
-          class="entities"
-          style="grid-template-columns: repeat(${this.rowSize}, 1fr);"
-        >
-          ${this.entityValues.map((t) => {
+        : j`<div class="overlay-strip"><div class="entities" style="grid-template-columns:repeat(${
+            this.rowSize
+          },1fr)">${this.entityValues.map((t) => {
             if (t.error)
-              return j`
-                <div class="entity-state" style="${this.grid(t.size)}">
-                  ${ot(t.error)}
-                  <span class="entity-value error">${t.entity}</span>
-                </div>
-              `;
+              return j`<div class="entity-state" style="${this.grid(
+                t.size
+              )}">${ot(t.error)} <span class="entity-value error">${
+                t.entity
+              }</span></div>`;
             let e = () => this.openEntityPopover(t.entity);
             if (t.action && t.action.service) {
               const { service: i, ...s } = t.action;
@@ -1440,30 +1423,18 @@
               }
             }
             return this.renderDomainDefault(i);
-          })}
-        </div>
-      </div>
-    `;
+          })}</div></div>`;
     }
     renderValue(
       { icon: t, value: e, image: i, action: s, click: n, color: r },
       o
     ) {
       return t || rt(e)
-        ? j`
-        <ha-icon
-          .icon="${t || e}"
-          style="${(r = r ? "color: " + r : "")}"
-          @click=${n}
-        ></ha-icon>
-      `
+        ? j`<ha-icon .icon="${t || e}" style="${(r = r
+            ? "color: " + r
+            : "")}" @click="${n}"></ha-icon>`
         : !0 === i
-        ? j`
-        <state-badge
-          style="background-image: url(${e});"
-          @click=${n}
-        ></state-badge>
-      `
+        ? j`<state-badge style="background-image:url('${e}')" @click="${n}"></state-badge>`
         : o();
     }
     renderDomainDefault({
@@ -1476,14 +1447,11 @@
     }) {
       const o = this.renderValue(
         { ...r, value: t, click: n },
-        () => j` ${t} ${e} `
+        () => j`${t} ${e}`
       );
-      return j`
-      <a class="entity-state" style="${this.grid(s)}" @click=${n}>
-        ${ot(i, n)}
-        <span class="entity-value">${o}</span>
-      </a>
-    `;
+      return j`<a class="entity-state" style="${this.grid(
+        s
+      )}" @click="${n}">${ot(i, n)} <span class="entity-value">${o}</span></a>`;
     }
     renderCustom({
       value: t,
@@ -1496,18 +1464,11 @@
     }) {
       const a = this.renderValue(
         { ...o, value: t, unit: e, click: i },
-        () => j`
-        <mwc-button ?dense=${!0} @click=${i}>
-          ${t} ${e}
-        </mwc-button>
-      `
+        () => j`<mwc-button ?dense="${!0}" @click="${i}">${t} ${e}</mwc-button>`
       );
-      return j`
-      <div class="entity-state" style="${this.grid(n)}">
-        ${ot(s, r)}
-        <span class="entity-value">${a}</span>
-      </div>
-    `;
+      return j`<div class="entity-state" style="${this.grid(
+        n
+      )}">${ot(s, r)} <span class="entity-value">${a}</span></div>`;
     }
     renderDomainMediaPlayer({
       onClick: t,
@@ -1521,45 +1482,21 @@
       const a = "playing" === n,
         c = a ? "media_pause" : "media_play",
         l = [e.media_artist, e.media_title].join(" – ");
-      return j`
-      <div class="entity-state" style="${this.grid(i || "full")}">
-        ${ot(s, t)}
-        <div class="entity-value">
-          <div class="entity-state-left media-title">${l}</div>
-          <div class="entity-state-right media-controls">
-            <ha-icon-button
-              icon="mdi:skip-previous"
-              role="button"
-              @click=${this._service(o, "media_previous_track", r)}
-            ></ha-icon-button>
-            <ha-icon-button
-              icon="${a ? "mdi:stop" : "mdi:play"}"
-              role="button"
-              @click=${this._service(o, c, r)}
-            ></ha-icon-button>
-            <ha-icon-button
-              icon="mdi:skip-next"
-              role="button"
-              @click=${this._service(o, "media_next_track", r)}
-            ></ha-icon-button>
-          </div>
-        </div>
-      </div>
-    `;
+      return j`<div class="entity-state" style="${this.grid(
+        i || "full"
+      )}">${ot(s, t)}<div class="entity-value"><div class="entity-state-left media-title">${l}</div><div class="entity-state-right media-controls"><ha-icon-button icon="mdi:skip-previous" role="button" @click="${this._service(o, "media_previous_track", r)}"></ha-icon-button><ha-icon-button icon="${a ? "mdi:stop" : "mdi:play"}" role="button" @click="${this._service(o, c, r)}"></ha-icon-button><ha-icon-button icon="mdi:skip-next" role="button" @click="${this._service(o, "media_next_track", r)}"></ha-icon-button></div></div></div>`;
     }
     _renderCustomElement(t, e, i) {
-      return j`
-      <div class="entity-state" style="${this.grid(e.size || "full")}">
-        <div class="entity-value">
-          <div class="entity-padded ${i}">
-            ${(function (t, e, i) {
-              const s = document.createElement(t);
-              return s.setConfig && s.setConfig(e), (s.hass = i), s;
-            })(t, e, this._hass)}
-          </div>
-        </div>
-      </div>
-    `;
+      return j`<div class="entity-state" style="${this.grid(
+        e.size || "full"
+      )}"><div class="entity-value"><div class="entity-padded ${i}">${(function (
+        t,
+        e,
+        i
+      ) {
+        const s = document.createElement(t);
+        return s.setConfig && s.setConfig(e), (s.hass = i), s;
+      })(t, e, this._hass)}</div></div></div>`;
     }
     renderCustomElement(t, e, i = "") {
       if (customElements.get(t)) return this._renderCustomElement(t, e, i);
@@ -1576,48 +1513,20 @@
     }) {
       return (
         (o = o || "var(--switch-checked-color)"),
-        j`
-      <div class="entity-state" style="${this.grid(e)}">
-        ${ot(i, t)}
-        <span class="entity-value">
-          <ha-switch
-            /*style="--mdc-theme-secondary: ${o};"*/
-            ?checked=${"on" === s}
-            @click=${this._service(n, "toggle", r)}
-          >
-          </ha-switch>
-        </span>
-      </div>
-    `
+        j`<div class="entity-state" style="${this.grid(e)}">${ot(
+          i,
+          t
+        )} <span class="entity-value"><ha-switch ?checked="${
+          "on" === s
+        }" @click="${this._service(n, "toggle", r)}"></ha-switch></span></div>`
       );
     }
     renderDomainCover({ onClick: t, size: e, name: i, state: s, entity: n }) {
       const r = "closed" === s || 0 === s,
         o = "open" === s || 100 === s;
-      return j`
-      <div class="entity-state" style="${this.grid(e)}">
-        ${ot(i, t)}
-        <span class="entity-value">
-          <ha-icon-button
-            ?disabled=${o}
-            icon="hass:arrow-up"
-            role="button"
-            @click=${this._service("cover", "open_cover", n)}
-          ><ha-icon icon="hass:arrow-up"></ha-icon-button>
-          <ha-icon-button
-            icon="hass:stop"
-            role="button"
-            @click=${this._service("cover", "stop_cover", n)}
-          ><ha-icon icon="hass:stop"></ha-icon-button>
-          <ha-icon-button
-            ?disabled=${r}
-            icon="hass:arrow-down"
-            role="button"
-            @click=${this._service("cover", "close_cover", n)}
-          ><ha-icon icon="hass:arrow-down"></ha-icon-button>
-        </span>
-      </div>
-    `;
+      return j`<div class="entity-state" style="${this.grid(
+        e
+      )}">${ot(i, t)} <span class="entity-value"><ha-icon-button ?disabled="${o}" icon="hass:arrow-up" role="button" @click="${this._service("cover", "open_cover", n)}"><ha-icon icon="hass:arrow-up"></ha-icon></ha-icon-button><ha-icon-button icon="hass:stop" role="button" @click="${this._service("cover", "stop_cover", n)}"><ha-icon icon="hass:stop"></ha-icon></ha-icon-button><ha-icon-button ?disabled="${r}" icon="hass:arrow-down" role="button" @click="${this._service("cover", "close_cover", n)}"><ha-icon icon="hass:arrow-down"></ha-icon></ha-icon-button></span></div>`;
     }
     getCardSize() {
       return 3;

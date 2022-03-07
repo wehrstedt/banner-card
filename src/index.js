@@ -448,7 +448,6 @@ class BannerCard extends LitElement {
         ${entityName(name, onClick)}
         <span class="entity-value">
           <ha-switch
-            /*style="--mdc-theme-secondary: ${color};"*/
             ?checked=${state === "on"}
             @click=${this._service(domain, "toggle", entity)}
           >
